@@ -11,3 +11,59 @@ body{
   background: #f1f1f1;
 }
 
+.ProseMirror {
+  min-height: 400px;
+  outline: none;
+}
+
+.ProseMirror p.is-editor-empty:first-child::before {
+  color: #9ca3af;
+  content: attr(data-placeholder);
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+.ProseMirror h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.ProseMirror ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+.ProseMirror ol {
+  list-style: decimal;
+  padding-left: 20px;
+}
+
+.ProseMirror blockquote {
+  border-left: 4px solid #ddd;
+  padding-left: 15px;
+  color: gray;
+}
+
+.ProseMirror code {
+  background: #f4f4f4;
+  padding: 2px 4px;
+}
+
+.ProseMirror pre {
+  background: #111;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.ProseMirror img {
+  max-width: 100%;
+  border-radius: 8px;
+  cursor: pointer;
+}

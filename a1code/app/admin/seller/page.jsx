@@ -4,7 +4,7 @@ import SellerData from '../../../Components/admin/SellerData'
 const page = () => {
   return (
    <>
-   <div className="p-4 lg:w-full sm:w-full mx-auto min-h-screen">
+   <div className="p-4 lg:w-3/4 sm:w-full mx-auto min-h-screen">
    <SellerData />
    </div>
    </>

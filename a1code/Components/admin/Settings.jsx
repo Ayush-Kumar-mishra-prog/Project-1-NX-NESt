@@ -32,6 +32,44 @@ const Settings = () => {
             </div>
           </div>
 
+           <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-4 md:mb-8 text-sm">
+            <div className="flex flex-col gap-2">
+              <label className="text-zinc-700"> Update Top logo navbar color</label>
+              <input
+                type="color" defaultValue="blue"
+               className="rounded-full"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-zinc-700">Upload Navbar color</label>
+               <input
+                type="color" defaultValue="blue"
+               className="rounded-full"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-zinc-700"> Update Navbar text color</label>
+              <input
+                type="color" defaultValue="white"
+               className="rounded-full"
+              />
+            </div>
+             <div className="flex flex-col gap-2">
+              <label className="text-zinc-700">Upload footer color</label>
+               <input
+                type="color" defaultValue="blue"
+               className="rounded-full"
+              />
+            </div>
+            <div className="flex flex-col gap-2">
+              <label className="text-zinc-700"> Update footer text color</label>
+              <input
+                type="color" defaultValue="blue"
+               className="rounded-full"
+              />
+            </div>
+          </div>
+
           <div className="flex flex-col gap-2 mb-4 md:mb-8 text-sm">
             <label className="text-zinc-700">Website Footer</label>
             <input
@@ -39,6 +77,8 @@ const Settings = () => {
               className="px-4 py-3 rounded-lg border border-zinc-200 bg-white placeholder:text-zinc-500 text-zinc-900 focus:outline-none focus:border-zinc-300 transition-colors"
             />
           </div>
+
+          
 
           <button className=" bg-blue-400 text-white hover:bg-blue-600 text-lg  rounded-md font-bold p-2  transition-colors cursor-pointer">
             Save

@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 guide.md
+/test
 
 /.pnp
 .pnp.*

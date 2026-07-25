@@ -2,6 +2,7 @@
 
 import { Edit2, Trash2, User2Icon } from "lucide-react";
 import  { useMemo, useState } from "react";
+import {useForm} from 'react-hook-form'
 
 const SellerData = () => {
   const sellerData = [
@@ -66,6 +67,7 @@ const SellerData = () => {
 
   const rowsPerPage = 6;
   const [currentPage, setCurrentPage] = useState(1);
+  const [showFrom,setShowForm] = useState(false)
   const pageCount = Math.max(1, Math.ceil(sellerData.length / rowsPerPage));
 
   const currentRows = useMemo(() => {
@@ -78,6 +80,19 @@ const SellerData = () => {
       setCurrentPage(page);
     }
   };
+  const [finalFormData, setFinalFormData] = useState(null);
+
+  const {register,handleSubmit,formState:{errors},reset,setValue,getValues} = useForm();
+    const onSubmit = (data) => {
+      const combinedData = {
+        ...data 
+      };
+  
+      setFinalFormData(combinedData); 
+      console.log(combinedData);
+  
+     
+    };
 
   return (
     <div className="space-y-4 p-4 sm:p-6">
@@ -94,12 +109,83 @@ const SellerData = () => {
           </div>
         </div>
         <button
-          type="button"
+          type="button" onClick={()=>setShowForm(true)}
           className="inline-flex items-center justify-center  bg-blue-600 px-4 py-2 text-xl font-medium text-white transition hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
           Add Seller
         </button>
       </div>
+
+      {
+        showFrom ? (
+          <div className="border border-gray-200 bg-white shadow-sm">
+                   <div className="">
+                    <form action="" className="p-3" onSubmit={handleSubmit(onSubmit)}>
+                      <div className="mb-3">
+                      <label className="mb-3 text-lg text-zinc-800">
+                      Enter Your  Name
+                      </label>
+                      <input type="text" className="w-full mt-3 p-2 border border-slate-300 border-l-6 rounded-md" {...register("name", { required: " Name is required" })} />
+                      {errors.name && <p className="text-red-500 mt-2 text-sm">{errors.name.message}</p> }
+                      </div>
+                      
+                      <div className="mb-3 ">
+                      <label className="mb-3 text-lg text-zinc-800">
+                      Enter Your Username
+                      </label>
+                      <input type="date" className="w-full mt-3 p-2 border border-slate-300 border-l-6 rounded-md" {...register("date", { required: " Date is required" })} />
+                      {errors.name && <p className="text-red-500 mt-2 text-sm">{errors.name.message}</p>}
+                      </div>
+                      <div className="mb-3  mt-5">
+                      <label className="mb-3 mt-5 text-lg text-zinc-800">
+                      Enter Your Username
+                      </label>
+                      <input type="text" className="w-full p-2 mt-3 border border-slate-300 border-l-6 rounded-md"  {...register("username", { required: "username  is required" })} />
+                       {errors.name && <p className="text-red-500 mt-2 text-sm">{errors.name.message}</p>}
+                      </div>
+                      <div className="mb-3 mt-5">
+                      <label className="mb-3 mt-5 text-lg text-zinc-800">
+                      Choose Your category area for upcomming projects
+                      </label>
+                      <select name="category" id="" className="w-full mt-3 p-2 border border-slate-300 border-l-6 rounded-md" {...register("category")} >
+                         <option value="">Select category</option>
+                        <option value="Ecommerce Application" className="w-full p-2 border border-slate-300 border-l-6 rounded-md">Ecommerce Application</option>
+                        <option value="SaaS App" className="w-full p-2 border border-slate-300 border-l-6 rounded-md">SaaS App</option>
+                        <option value="Mobile application" className="w-full p-2 border border-slate-300 border-l-6 rounded-md">Mobile Application</option>
+                        <option value="Template" className="w-full p-2 border border-slate-300 border-l-6 rounded-md">Template</option>
+                      </select>
+                       
+          
+                      </div>
+                      <div className="mb-3 mt-5">
+                      <label className="mb-3 mt-5 text-lg text-zinc-800">
+                      Enter your email id
+                      </label>
+                      <input type="email" className="w-full mt-3 p-2 border border-slate-300 border-l-6 rounded-md" {...register("email", { required: "Email image is required" })}  />
+                      {errors.name && <p className="text-red-500 mt-2 text-sm">{errors.name.message}</p>}
+                      </div>
+                      
+          
+                      <div className="mt-3 mb-3 p-2">
+                        <h2 className="text-lg font-bold text-zinc-800 mb-5 mt-3 ml-3">Write the discription about your profile</h2>
+                       <textarea className="w-full mt-3 p-2 border border-slate-300 border-l-6 rounded-md" {...register("discription", { required: "This field  is required" })}  />
+                        
+                      </div>
+                      <div className="p-2 flex flex-row gap-2">
+                      <button className="p-2 w-1/2 text-lg cursor-pointer rounded-md bg-blue-600 hover:bg-blue-800 text-white" type="submit">Add Project</button>
+                      <button className="p-2 w-1/2 cursor-pointer text-lg rounded-md bg-slate-200" onClick={()=>setShowForm(false)} >Cancel</button>
+                    </div>
+          
+                    
+          
+                    </form>
+                   
+                   </div>
+                   
+                    </div>
+        )
+        :(
+         <div className="">
 
       <div className="space-y-4">
         <div className="sm:hidden space-y-3">
@@ -204,7 +290,7 @@ const SellerData = () => {
         </div>
       </div>
 
-      <div className="flex flex-col gap-3 rounded-2xl bg-white p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-3  bg-white mt-2 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between">
         <p className="text-sm text-slate-600">
           Page {currentPage} of {pageCount}
         </p>
@@ -246,6 +332,13 @@ const SellerData = () => {
           </button>
         </nav>
       </div>
+      </div>
+        )
+      }
+
+      {/* Seller Data open */}
+      
+      {/* Seller data closed */}
     </div>
   );
 };

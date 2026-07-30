@@ -1,9 +1,10 @@
 import projects from "../../data/projectData";
 import Image from "next/image";
-import { Calendar1Icon, User2Icon } from "lucide-react";
+import { Calendar1Icon, DownloadIcon, MessageCircle, User2Icon } from "lucide-react";
 import CommentCard from "../../../Components/CommentCard";
 import Form from "../../../Components/Form";
 import { assets } from "../../../Assets/assests";
+import Slider from '../../../Components/seller/Slider'
 export default async function ProjectData({ params }) {
   const { id } = await params;
   const project = projects.find((i) => i.id === Number(id));
@@ -38,11 +39,12 @@ export default async function ProjectData({ params }) {
             <p className="text-slate-600 ml-1">{project.date}</p>
           </div>
           <div className="flex justify-center items-center mt-4 ">
-            <Image
+            {/* <Image
               src={project.image}
               alt="projct image preview"
               className="lg:w-130 lg:h-90 object-cover"
-            />
+            /> */}
+            <Slider images={project.setImages} />
           </div>
           <p className="text-md text-slate-600 mt-3">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
@@ -56,6 +58,16 @@ export default async function ProjectData({ params }) {
             <span className="font-bold  shadow-md text-md p-3 rounded-md">
               {project.price}
             </span>
+            <button className="text-white bg-blue-600 p-3 hover:bg-blue-800 rounded-md">
+              <div className="flex gap-2">
+              <DownloadIcon /><p className="">200</p>
+              </div>
+            </button>
+             <button className="text-white bg-blue-600 p-3 hover:bg-blue-800 rounded-md">
+              <div className="flex gap-2">
+              <MessageCircle /><p className="">200</p>
+              </div>
+            </button>
             <button className="text-white bg-blue-600 p-3 hover:bg-blue-800 rounded-md">
               Buy Now
             </button>

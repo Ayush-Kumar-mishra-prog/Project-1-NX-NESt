@@ -9,6 +9,7 @@ const projects = [
     seller: "Aarav Studio",
     price: "Rs 2,499",
     image: assets.f1,
+    setImages:[assets.f1,assets.DummyImage],
     category: "Ecommerce",
     date: "2026-07-18",
     full_dis:
@@ -23,6 +24,7 @@ const projects = [
     price: "Rs 3,200",
     category: "Management",
     image: assets.f1,
+    setImages:[assets.f1,assets.DummyImage],
     date: "2026-07-16",
     full_dis:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde voluptatibus, reiciendis totam libero incidunt facere odit quas expedita placeat nobis impedit distinctio sunt assumenda consequatur officiis reprehenderit. Enim, deserunt accusamus?",
@@ -35,6 +37,7 @@ const projects = [
     seller: "Code Foundry",
     price: "Rs 4,999",
     image: assets.f1,
+    setImages:[assets.f1,assets.DummyImage],
     category: "SaaS",
     date: "2026-07-14",
     full_dis:
@@ -49,6 +52,7 @@ const projects = [
     price: "Rs 1,899",
     category: "Mobile",
     image: assets.f1,
+    setImages:[assets.f1,assets.DummyImage],
     date: "2026-07-12",
     full_dis:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde voluptatibus, reiciendis totam libero incidunt facere odit quas expedita placeat nobis impedit distinctio sunt assumenda consequatur officiis reprehenderit. Enim, deserunt accusamus?",
@@ -61,6 +65,7 @@ const projects = [
     seller: "Frontend Hive",
     price: "Rs 1,499",
     image: assets.f1,
+    setImages:[assets.f1,assets.DummyImage],
     category: "Web",
     date: "2026-07-10",
     full_dis:
@@ -73,6 +78,7 @@ const projects = [
       "Stock tracking, supplier records, low-stock alerts, product movement history, and reports.",
     seller: "Ops Craft",
     image: assets.f1,
+    setImages:[assets.f1,assets.DummyImage],
     price: "Rs 2,799",
     category: "Management",
     date: "2026-07-08",
@@ -87,6 +93,7 @@ const projects = [
     seller: "Learn Stack",
     price: "Rs 3,850",
     image: assets.f1,
+    setImages:[assets.f1,assets.DummyImage],
     category: "SaaS",
     date: "2026-07-05",
     full_dis:
@@ -100,6 +107,7 @@ const projects = [
     seller: "Style Code",
     price: "Rs 2,250",
     image: assets.f1,
+    setImages:[assets.f1,assets.DummyImage],
     category: "Ecommerce",
     date: "2026-07-02",
     full_dis:
@@ -113,6 +121,7 @@ const projects = [
     seller: "Launch Works",
     price: "Rs 1,250",
     image: assets.f1,
+    setImages:[assets.f1,assets.DummyImage],
     category: "Web",
     date: "2026-06-28",
     full_dis:
@@ -127,6 +136,7 @@ const projects = [
     price: "Rs 2,100",
     category: "Mobile",
     image: assets.f1,
+    setImages:[assets.f1,assets.DummyImage],
     date: "2026-06-23",
     full_dis:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde voluptatibus, reiciendis totam libero incidunt facere odit quas expedita placeat nobis impedit distinctio sunt assumenda consequatur officiis reprehenderit. Enim, deserunt accusamus?",
@@ -140,6 +150,7 @@ const projects = [
     price: "Rs 3,600",
     category: "Web",
     image: assets.f1,
+    setImages:[assets.f1,assets.DummyImage],
     date: "2026-06-19",
     full_dis:
       "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Unde voluptatibus, reiciendis totam libero incidunt facere odit quas expedita placeat nobis impedit distinctio sunt assumenda consequatur officiis reprehenderit. Enim, deserunt accusamus?",
@@ -151,6 +162,7 @@ const projects = [
       "Operational analytics with KPI cards, comparison tables, export actions, and team filters.",
     seller: "Metric Nest",
     image: assets.f1,
+    setImages:[assets.f1,assets.DummyImage],
     price: "Rs 4,400",
     category: "Management",
     date: "2026-06-15",

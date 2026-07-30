@@ -78,6 +78,14 @@ const Settings = () => {
             />
           </div>
 
+          <div className="flex flex-col gap-2 mb-4 md:mb-8 text-sm">
+            <label className="text-zinc-700">Add new category to website</label>
+            <input
+              type="text"
+              className="px-4 py-3 rounded-lg border border-zinc-200 bg-white placeholder:text-zinc-500 text-zinc-900 focus:outline-none focus:border-zinc-300 transition-colors"
+            />
+          </div>
+
           
 
           <button className=" bg-blue-400 text-white hover:bg-blue-600 text-lg  rounded-md font-bold p-2  transition-colors cursor-pointer">

@@ -1,10 +1,11 @@
-import Earn from '../../../Components/admin/Earn'
+
+import SellerEarnings from '../../../Components/seller/SellerEarnings'
 
 const page = () => {
   return (
     <>
     <div className="p-4 lg:w-3/4 sm:w-full mx-auto min-h-screen">
-       <Earn />
+       <SellerEarnings />
        </div>
     </>
   )

@@ -2,12 +2,12 @@
 
 /* ===================== */
 /* COMMOM CSS */
-:root{
---main-color: #1E90FF;
---secondary-color: #333;
+:root {
+  --main-color: #1e90ff;
+  --secondary-color: #333;
 }
 
-body{
+body {
   background: #f1f1f1;
 }
 
@@ -66,4 +66,52 @@ body{
   max-width: 100%;
   border-radius: 8px;
   cursor: pointer;
+}
+
+.image-gallery-wrapper {
+  width: 100%;
+}
+
+.image-gallery-wrapper .image-gallery-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+}
+
+.image-gallery-wrapper .image-gallery-image {
+  width: 100%;
+  max-height: 520px;
+  object-fit: cover;
+  border-radius: 1rem;
+}
+
+.image-gallery-wrapper .image-gallery-thumbnails .image-gallery-thumbnail {
+  width: 98px;
+  height: 70px;
+  overflow: hidden;
+  border-radius: 0.75rem;
+}
+
+.image-gallery-wrapper .image-gallery-thumbnail img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.image-gallery-wrapper .image-gallery-icon {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+}
+
+.image-gallery-wrapper .image-gallery-left-nav,
+.image-gallery-wrapper .image-gallery-right-nav {
+  top: calc(50% - 17px);
+}
+
+.image-gallery-wrapper .image-gallery-left-nav svg,
+.image-gallery-wrapper .image-gallery-right-nav svg {
+  width: 20px;
+  height: 20px;
 }

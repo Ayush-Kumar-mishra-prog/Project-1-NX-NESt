@@ -160,7 +160,7 @@ const ProjectCard = ({ variant = "paginated", limit = 6 }) => {
                   fill
                   sizes="(max-width: 640px) 100vw, 192px"
                   className="object-cover"
-                  alt={`${project.name} preview`}
+                  alt={`${project.name} preview`} loading="eager"
                 />
               </div>
 

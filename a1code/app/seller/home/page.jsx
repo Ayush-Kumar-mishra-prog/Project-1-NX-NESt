@@ -1,10 +1,10 @@
-import React from 'react'
-import AdminDashboard from '../../../Components/admin/AdminDashboard'
+
+import SellerHome from '../../../Components/seller/SellerHome'
 
 const page = () => {
   return (
    <div className="p-5 mt-3 bg-white w-full">
-    <AdminDashboard />
+    <SellerHome />
    </div>
   )
 }

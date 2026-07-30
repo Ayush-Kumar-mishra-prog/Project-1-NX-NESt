@@ -22,51 +22,8 @@ const recentPosts = sortedProjects.slice(0, 5).map((post) => ({
   image: assets.i1,
 }));
 
-const ProjectSidebar = ({ activeCategory, changeCategory, isLatest }) => (
+const ProjectSidebar = ({ isLatest }) => (
   <div className="space-y-6">
-    {!isLatest && (
-      <div className="bg-white p-4 shadow-sm">
-        <div className="mb-4 border-l-4 border-l-blue-600">
-          <h2 className="ml-2 text-xl font-semibold">CATEGORIES</h2>
-        </div>
-        <div className="grid gap-2">
-          {categories.map((category) => (
-            <button
-              key={category}
-              type="button"
-              onClick={() => changeCategory(category)}
-              className={`w-full rounded-md border px-4 py-2 text-left text-sm font-semibold transition ${
-                activeCategory === category
-                  ? "border-blue-600 bg-blue-600 text-white"
-                  : "border-slate-200 bg-white text-slate-700 hover:border-blue-300 hover:text-blue-700"
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-      </div>
-    )}
-
-    <div className="bg-white p-4 shadow-sm">
-      <div className="mb-4 border-l-4 border-l-blue-600">
-        <h2 className="ml-2 text-xl font-semibold">SEARCH</h2>
-      </div>
-      <div className="flex flex-col gap-2 sm:flex-row lg:flex-col xl:flex-row">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="min-w-0 flex-1 rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-blue-500"
-        />
-        <button
-          type="button"
-          className="rounded-md bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600"
-        >
-          Search
-        </button>
-      </div>
-    </div>
-
     <div className="bg-white p-4 shadow-sm">
       <div className="mb-4 border-l-4 border-l-blue-600">
         <h2 className="ml-2 text-xl font-semibold">RECENT POSTS</h2>
@@ -93,19 +50,41 @@ const ProjectSidebar = ({ activeCategory, changeCategory, isLatest }) => (
   </div>
 );
 
-const ProjectCard = ({ variant = "paginated", limit = 6 }) => {
+const ProjectCard = ({
+  variant = "paginated",
+  limit = 6,
+  activeCategory = "All",
+}) => {
   const isLatest = variant === "latest";
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const projectsPerPage = 6;
 
   const filteredProjects = useMemo(() => {
-    if (activeCategory === "All") return sortedProjects;
-    return sortedProjects.filter(
-      (project) => project.category === activeCategory,
-    );
-  }, [activeCategory]);
+    const baseProjects =
+      activeCategory === "All"
+        ? sortedProjects
+        : sortedProjects.filter(
+            (project) => project.category === activeCategory,
+          );
+
+    if (!searchTerm.trim()) {
+      return baseProjects;
+    }
+
+    const normalizedSearch = searchTerm.toLowerCase();
+    return baseProjects.filter((project) => {
+      return [
+        project.name,
+        project.category,
+        project.seller,
+        project.date,
+        project.description,
+      ]
+        .filter(Boolean)
+        .some((field) => field.toLowerCase().includes(normalizedSearch));
+    });
+  }, [activeCategory, searchTerm]);
 
   const totalPages = Math.max(
     1,
@@ -119,31 +98,38 @@ const ProjectCard = ({ variant = "paginated", limit = 6 }) => {
         firstProjectIndex + projectsPerPage,
       );
 
-  const changeCategory = (category) => {
-    setActiveCategory(category);
+  const handleSearch = () => {
     setCurrentPage(1);
-    setIsSidebarOpen(false);
   };
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-6">
       {!isLatest && (
-        <div className="mb-4 flex items-center justify-between gap-3 lg:hidden">
-          <p className="text-sm font-semibold text-slate-600">
-            Showing {activeCategory} projects
-          </p>
-          <button
-            type="button"
-            onClick={() => setIsSidebarOpen(true)}
-            className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-blue-600 text-white shadow-sm"
-            aria-label="Open sidebar"
-          >
-            <span className="flex w-5 flex-col gap-1" aria-hidden="true">
-              <span className="h-0.5 rounded bg-white" />
-              <span className="h-0.5 rounded bg-white" />
-              <span className="h-0.5 rounded bg-white" />
-            </span>
-          </button>
+        <div className="mb-6 space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm font-semibold text-slate-600">
+              Showing {activeCategory} projects
+            </p>
+            <p className="text-sm text-slate-500">
+              Use the navbar category links to filter projects.
+            </p>
+          </div>
+          <div className="flex flex-col gap-3 sm:flex-row">
+            <input
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              type="text"
+              placeholder="Search by category, project name, seller, or date"
+              className="min-w-0 flex-1 rounded-md border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
+            />
+            <button
+              type="button"
+              onClick={handleSearch}
+              className="h-12 rounded-md bg-blue-600 px-5 text-sm font-semibold text-white transition hover:bg-blue-700"
+            >
+              Search
+            </button>
+          </div>
         </div>
       )}
 
@@ -160,7 +146,8 @@ const ProjectCard = ({ variant = "paginated", limit = 6 }) => {
                   fill
                   sizes="(max-width: 640px) 100vw, 192px"
                   className="object-cover"
-                  alt={`${project.name} preview`} loading="eager"
+                  alt={`${project.name} preview`}
+                  loading="eager"
                 />
               </div>
 
@@ -169,7 +156,8 @@ const ProjectCard = ({ variant = "paginated", limit = 6 }) => {
                   {project.category}
                 </p>
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
-                  <Link href={`/projects/${project.id}`}
+                  <Link
+                    href={`/projects/${project.id}`}
                     className="text-xl font-bold leading-7 text-blue-600 sm:text-2xl cursor-pointer"
                     onClick={() => handlePage(project.id)}
                   >
@@ -256,40 +244,13 @@ const ProjectCard = ({ variant = "paginated", limit = 6 }) => {
         </div>
 
         <aside className="hidden lg:col-span-4 lg:block">
-          <ProjectSidebar
-            activeCategory={activeCategory}
-            changeCategory={changeCategory}
-            isLatest={isLatest}
-          />
+          <ProjectSidebar isLatest={isLatest} />
         </aside>
       </div>
 
-      {!isLatest && isSidebarOpen && (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <button
-            type="button"
-            className="absolute inset-0 bg-slate-950/50"
-            onClick={() => setIsSidebarOpen(false)}
-            aria-label="Close sidebar overlay"
-          />
-          <aside className="absolute right-0 top-0 h-full w-[min(88vw,360px)] overflow-y-auto bg-slate-50 p-4 shadow-xl">
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="text-lg font-bold text-slate-900">Filters</h2>
-              <button
-                type="button"
-                onClick={() => setIsSidebarOpen(false)}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-md bg-slate-900 text-2xl leading-none text-white"
-                aria-label="Close sidebar"
-              >
-                <span aria-hidden="true">x</span>
-              </button>
-            </div>
-            <ProjectSidebar
-              activeCategory={activeCategory}
-              changeCategory={changeCategory}
-              isLatest={isLatest}
-            />
-          </aside>
+      {!isLatest && (
+        <div className="lg:hidden">
+          <ProjectSidebar isLatest={isLatest} />
         </div>
       )}
     </section>

@@ -6,6 +6,8 @@ const navItems = [
   "Management applications",
   "Mobile applications",
   "Web applications",
+
+  
 ];
 
 const Navbar = () => {

@@ -2,7 +2,7 @@
 import { BellIcon, Dock, Edit2, MessageCircle, Trash2, User2Icon } from "lucide-react";
 import  { useMemo, useState } from "react";
 
-const Notification = () => {
+const SellerNotifications = () => {
 
       const sellerData = [
     {
@@ -287,4 +287,4 @@ const Notification = () => {
   )
 }
 
-export default Notification
+export default SellerNotifications

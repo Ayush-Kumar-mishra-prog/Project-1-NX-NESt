@@ -1,11 +1,12 @@
-import Creditionals from "../../../Components/admin/Creditionals"
+
+import SellerCreditionals from "../../../Components/seller/SellerCreditionals"
 
 
 
 const page = () => {
   return (
     <div className='p-4 lg:w-3/4 sm:w-full mx-auto min-h-screen'>
-      <Creditionals />
+      <SellerCreditionals />
     </div>
   )
 }

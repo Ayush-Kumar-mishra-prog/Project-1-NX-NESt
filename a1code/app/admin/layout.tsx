@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
-import "../../globals.css";
-import {  Saira } from 'next/font/google'
 import {ReplyProvider} from "@/context/ReplyCommentContext"
 import Image from "next/image";
 import { assets } from "@/Assets/assests";
-import { BellIcon, EyeIcon, HomeIcon, IndianRupee, PersonStandingIcon, Settings, Settings2Icon, Toolbox, WorkflowIcon } from "lucide-react";
+import { BellIcon, EyeIcon, HomeIcon, IndianRupee, PersonStandingIcon, Settings,  WorkflowIcon } from "lucide-react";
 import Link from "next/link";
 
 
@@ -13,13 +11,10 @@ export const metadata: Metadata = {
   description: "Best place of finding the best projects",
 };
 
-const outfit = Saira({
-  subsets:["latin"],
-  variable:"--font-saira"
-})
 
 
-export default function ProjectsLayout({
+
+export default function DashboardLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

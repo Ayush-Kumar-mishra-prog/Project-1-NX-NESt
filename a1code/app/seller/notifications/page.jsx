@@ -1,10 +1,10 @@
-import React from 'react'
-import Notification from '../../../Components/admin/Notification'
+
+import SellerNotifications from '../../../Components/seller/SellerNotifications'
 
 const page = () => {
   return (
    <div className='p-4 lg:w-3/4 sm:w-full mx-auto min-h-screen'>
-      <Notification />
+      <SellerNotifications />
     </div>
   )
 }

@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { assets } from "../Assets/assests";
 import { Calendar1Icon, User2Icon } from "lucide-react";
+import { Button, TextField } from '@mui/material'
 
 const categories = ["All", "Ecommerce", "SaaS", "Management", "Mobile", "Web"];
 
@@ -104,42 +105,23 @@ const ProjectCard = ({
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-6">
-      {!isLatest && (
-        <div className="mb-6 space-y-4">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-sm font-semibold text-slate-600">
-              Showing {activeCategory} projects
-            </p>
-            <p className="text-sm text-slate-500">
-              Use the navbar category links to filter projects.
-            </p>
-          </div>
-          <div className="flex flex-col gap-3 sm:flex-row">
-            <input
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              type="text"
-              placeholder="Search by category, project name, seller, or date"
-              className="min-w-0 flex-1 rounded-md border border-slate-300 bg-white px-4 py-3 text-sm outline-none transition focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-            />
-            <button
-              type="button"
-              onClick={handleSearch}
-              className="h-12 rounded-md bg-blue-600 px-5 text-sm font-semibold text-white transition hover:bg-blue-700"
-            >
-              Search
-            </button>
-          </div>
-        </div>
-      )}
+      
 
       <div className="grid gap-6 lg:grid-cols-12">
         <div className="space-y-4 lg:col-span-8">
+           <div className="flex flex-row gap-2 ">
+          <TextField fullWidth placeholder="Search by category, project name, seller, or date" variant="outlined" size="small"  value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}  />
+            <Button onClick={handleSearch}   variant="contained">Search</Button>
+            </div>
+
+
           {visibleProjects.map((project) => (
             <article
               key={`${project.name}-${project.date}`}
               className="flex w-full flex-col gap-4 bg-white p-4 shadow-sm sm:flex-row"
             >
+              
               <div className="relative h-48 w-full shrink-0 overflow-hidden bg-slate-100 sm:h-36 sm:w-48">
                 <Image
                   src={project.image}
@@ -176,9 +158,12 @@ const ProjectCard = ({
                   <Calendar1Icon size={18} className="text-blue-500" />
                   <p className="text-slate-500">{project.date}</p>
                 </div>
-                <button className="mt-4 w-full rounded bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600 sm:ml-auto sm:w-auto">
+                <button className="mt-4 w-full rounded bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600 sm:ml-auto sm:w-auto cursor-pointer"
+                    onClick={() => handlePage(project.id)}>
                   Read More
                 </button>
+
+               
               </div>
             </article>
           ))}

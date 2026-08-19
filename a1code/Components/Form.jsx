@@ -5,7 +5,8 @@ import CommentCard from "./CommentCard";
 import { useComment } from "../context/ReplyCommentContext";
 
 const Form = () => {
-  const { setComments } = useComment();
+   
+  const { setComments,loggedIn } = useComment();
   const {
     register,
     handleSubmit,
@@ -17,6 +18,11 @@ const Form = () => {
     reset();
   };
 
+   const handleCheckLogin = ()=>{
+      if(!loggedIn){
+        alert("Please login to purchase the project")
+      }
+    }
   return (
     <>
       <form
@@ -64,7 +70,7 @@ const Form = () => {
             <p className="text-base-text-red mt-1">{errors.comment.message}</p>
           )}
         </div>
-        <button
+        <button onClick={()=>handleCheckLogin}
           type="submit"
           className="bg-blue-400 text-white p-3 hover:bg-blue-600 rounded-md text-lg font-bold"
         >

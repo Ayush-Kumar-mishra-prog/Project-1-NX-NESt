@@ -1,5 +1,7 @@
 "use client"
 
+import { Button } from '@mui/material'
+
 const BecomeSellerForm = () => {
   return (
     <div className="p-8  bg-white w-100">
@@ -23,9 +25,11 @@ const BecomeSellerForm = () => {
               <p className="text-base text-slate-400">Once the admin approve your request you can easily sign in in the application from login page using your seller email id and password</p>
          
             <div className="flex justify-center items-center mt-4">
-            <button className="px-5 py-3 text-white w-full bg-blue-500">
+            {/* <button className="px-5 py-3 text-white w-full bg-blue-500">
                 Send Request
-            </button>
+            </button> */}
+
+<Button fullWidth variant='contained'>Send Request</Button>
             </div>
             
         </form>

@@ -1,5 +1,27 @@
-import { assets } from "../../Assets/assests";
+// import { useEffect, useState } from "react";
 
+// import api from "../lib/axios";
+
+
+
+
+// const [projects,setProjects] = useState([])
+
+// const handleLoadProject = async()=>{
+//   try {
+//     const response= await api.get('/category/api/v1/project/projects');
+//     setProjects(response.data.data)
+//   } catch (error) {
+//     console.log(error.response.data || error.message)
+//   }
+// }
+//   useEffect(() => {
+//     handleLoadProject();
+//   }, [])
+
+// export default projects;
+
+import { assets } from "../../Assets/assests";
 const projects = [
   {
     id: 1,

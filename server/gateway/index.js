@@ -18,7 +18,8 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/auth',proxy(process.env.AUTH_SERVER_URL))
-app.use('/settings',proxy(process.env.SETTINGS_SERVER_URL))
+app.use('/settings',proxy(process.env.SETTINGS_SERVER_URL,{parseReqBody:false}))
+app.use('/category',proxy(process.env.SETTINGS_CATEGORY_URL,{parseReqBody:false},))
 
 app.listen(port,()=>{
     console.log("server started" + port)

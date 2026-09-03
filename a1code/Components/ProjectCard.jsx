@@ -1,14 +1,19 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import projects from "../app/data/projectData";
 import Image from "next/image";
 import Link from "next/link";
 import { assets } from "../Assets/assests";
-import { Calendar1Icon, User2Icon } from "lucide-react";
+import { Calendar1Icon, HeartIcon, IndianRupee, User2Icon,ShoppingCart, Eye } from "lucide-react";
 import { Button, TextField } from '@mui/material'
+import api from "@/app/lib/axios";
 
 const categories = ["All", "Ecommerce", "SaaS", "Management", "Mobile", "Web"];
+
+
+
+
 
 const handlePage = (id) => {
   alert("test" + id);
@@ -17,6 +22,25 @@ const handlePage = (id) => {
 const sortedProjects = [...projects].sort(
   (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
 );
+
+const PROJECT_IMAGE_BASE_URL = "http://localhost:8003";
+
+const getProjectImageUrl = (project) => {
+  const imagePath = project?.show_image || project?.project_image || "";
+
+  if (!imagePath) {
+    return assets.f1;
+  }
+
+  if (imagePath.startsWith("http://") || imagePath.startsWith("https://")) {
+    return imagePath;
+  }
+
+  const normalizedPath = imagePath.startsWith("/") ? imagePath : `/${imagePath}`;
+  const trimmedPath = normalizedPath.startsWith("/uploads") ? normalizedPath : `/uploads${normalizedPath}`;
+
+  return `${PROJECT_IMAGE_BASE_URL}${trimmedPath}`;
+};
 
 const recentPosts = sortedProjects.slice(0, 5).map((post) => ({
   ...post,
@@ -27,7 +51,7 @@ const ProjectSidebar = ({ isLatest }) => (
   <div className="space-y-6">
     <div className="bg-white p-4 shadow-sm">
       <div className="mb-4 border-l-4 border-l-blue-600">
-        <h2 className="ml-2 text-xl font-semibold">RECENT POSTS</h2>
+        <h2 className="ml-2 text-xl font-semibold">RECENT PROJECTS</h2>
       </div>
       <div className="space-y-3">
         {recentPosts.map((post) => (
@@ -102,6 +126,21 @@ const ProjectCard = ({
   const handleSearch = () => {
     setCurrentPage(1);
   };
+ const [loadData,setLoadData] = useState([])
+
+ const handleLoadProject = async()=>{
+  try {
+    const response= await api.get('/category/api/v1/project/projects');
+    setLoadData(response.data.data)
+  } catch (error) {
+    console.log(error.response.data || error.message)
+  }
+}
+  useEffect(() => {
+    handleLoadProject();
+  }, []);
+
+  const tagData = ["React","Node js","Express js","Mongodb"]
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-6">
@@ -115,53 +154,72 @@ const ProjectCard = ({
             <Button onClick={handleSearch}   variant="contained">Search</Button>
             </div>
 
+            <div className="mb-4 border-l-4 border-l-blue-600 bg-white p-2">
+        <h2 className="ml-2 text-xl font-semibold">AVAILABLE PROJECTS</h2>
+      </div>
 
-          {visibleProjects.map((project) => (
+
+          {loadData.map((project) => (
             <article
-              key={`${project.name}-${project.date}`}
+              key={`${project._id}`}
               className="flex w-full flex-col gap-4 bg-white p-4 shadow-sm sm:flex-row"
             >
               
               <div className="relative h-48 w-full shrink-0 overflow-hidden bg-slate-100 sm:h-36 sm:w-48">
                 <Image
-                  src={project.image}
+                  src={getProjectImageUrl(project)}
+                  alt={`${project.name} preview`}
                   fill
                   sizes="(max-width: 640px) 100vw, 192px"
-                  className="object-cover"
-                  alt={`${project.name} preview`}
-                  loading="eager"
+                  className="object-contain"
+                  priority={false}
+                  unoptimized
                 />
               </div>
 
               <div className="flex min-w-0 flex-1 flex-col">
-                <p className="mb-1 text-sm font-bold uppercase text-blue-500">
+                <div className=" rounded-md flex justify-between">
+                <p className="mb-1 bg-slate-200 p-2 rounded-md  shadow-2xl text-sm font-bold uppercase text-blue-500">
                   {project.category}
                 </p>
+                <HeartIcon size={18} className="text-blue-700 mb-2 cursor-pointer" />
+                </div>
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                   <Link
-                    href={`/projects/${project.id}`}
+                    href={`/projects/${project._id}`}
                     className="text-xl font-bold leading-7 text-blue-600 sm:text-2xl cursor-pointer"
-                    onClick={() => handlePage(project.id)}
+                    onClick={() => handlePage(project._id)}
                   >
                     {project.name}
                   </Link>
-                  <p className="shrink-0 font-bold text-blue-600">
+                  <div className="flex   items-center">
+                    <IndianRupee size={18} className="text-blue-600" />
+                  <p className="shrink-0 font-bold text-blue-600 text-lg">
                     {project.price}
                   </p>
+                  </div>
                 </div>
                 <p className="mt-2 text-sm leading-6 text-slate-700 sm:text-base">
-                  {project.description}
+                  {project.discription
+}
                 </p>
                 <div className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-sm">
                   <User2Icon size={18} className="text-blue-500" />
-                  <p className="font-medium text-blue-500">{project.seller}</p>
+                  <p className="font-medium text-blue-500">{project.seller || "Not available yet"}</p>
                   <Calendar1Icon size={18} className="text-blue-500" />
                   <p className="text-slate-500">{project.date}</p>
                 </div>
-                <button className="mt-4 w-full rounded bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600 sm:ml-auto sm:w-auto cursor-pointer"
-                    onClick={() => handlePage(project.id)}>
+                 
+                
+                
+                {/* <button className="mt-4 w-full rounded bg-blue-500 px-4 py-2 text-white transition hover:bg-blue-600 sm:ml-auto sm:w-auto cursor-pointer"
+                    onClick={() => handlePage(project._id)}>
                   Read More
-                </button>
+                </button> */}
+                <div className="mt-4  float-right w-full  flex lg:justify-end items-center    sm:justify-start sm:w-full cursor-pointer">
+                <Button variant="contained">Read More</Button>
+                </div>
+               
 
                
               </div>

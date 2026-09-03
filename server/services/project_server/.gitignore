@@ -4,6 +4,7 @@
 /node_modules
 guide.md
 /test
+/uploads
 
 /.pnp
 .pnp.*
